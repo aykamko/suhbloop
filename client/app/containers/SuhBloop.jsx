@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import Immutable from 'immutable';
 // import * as suhBloopActionCreators from '../actions/suhBloopActionCreators';
 
@@ -12,7 +12,7 @@ function select(state) {
 
 // Simple example of a React "smart" component
 const SuhBloop = (props) => {
-  const { dispatch, $$suhBloopStore } = props;
+  const { /* dispatch, */ $$suhBloopStore } = props;
 
   return (
     <div>

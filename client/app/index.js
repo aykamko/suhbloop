@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import createStore from './store/SuhBloopStore';
 import SuhBloop from './containers/SuhBloop';
 
-const SuhBloopApp = (props, _railsContext) => {
+const SuhBloopApp = (props /* _railsContext */) => {
   const store = createStore(props);
   const reactComponent = (
     <Provider store={store}>

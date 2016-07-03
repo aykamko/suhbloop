@@ -7,7 +7,7 @@ export const $$initialState = Immutable.fromJS({
 });
 
 export default function suhBloopReducer($$state = $$initialState, action) {
-  const { type, name } = action;
+  const { type /* name */ } = action;
 
   switch (type) {
     default:

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GoogleFormsResponsesControllerTest < ActionDispatch::IntegrationTest
-  test "should create GoogleFormResponse on post" do
+  test 'should create GoogleFormResponse on post' do
     @response_id = '2_ABaOnucoJPTvrWxRXhphlFX0j6375RSved71fWs6wJpJwferpXBZSLjRW5WVWQ'
     @timestamp = '2016-07-03T20:31:06.448Z'
     @email = 'foo@bar.baz'
@@ -10,7 +10,7 @@ class GoogleFormsResponsesControllerTest < ActionDispatch::IntegrationTest
       response_id: @response_id,
       timestamp: @timestamp,
       respondent_email: @email,
-      respondent_name: @name,
+      respondent_name: @name
     }
     assert_response :success
 

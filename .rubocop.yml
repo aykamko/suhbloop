@@ -1,0 +1,12 @@
+LineLength:
+  Max: 100
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - db/migrate/*
+    - Gemfile
+    - bin/*

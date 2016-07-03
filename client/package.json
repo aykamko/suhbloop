@@ -8,9 +8,14 @@
   "scripts": {
     "build:test": "webpack --config webpack.config.js",
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
-    "build:development": "webpack -w --config webpack.config.js"
+    "build:development": "webpack -w --config webpack.config.js",
+    "lint_real": "eslint --ext=js --ext=jsx app",
+    "lint": "eslint --ext=js --ext=jsx app || true"
   },
-  "cacheDirectories": ["node_modules", "client/node_modules"],
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.6.5",
@@ -36,5 +41,11 @@
     "webpack": "^1.12.14"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.0",
+    "eslint": "^3.0.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.1",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2"
   }
 }
