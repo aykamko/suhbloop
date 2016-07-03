@@ -13,32 +13,18 @@ function select(state) {
 // Simple example of a React "smart" component
 const SuhBloop = (props) => {
   const { dispatch, $$suhBloopStore } = props;
-  // const actions = bindActionCreators(suhBloopActionCreators, dispatch);
-  // const { updateName } = actions;
-  const name = $$suhBloopStore.get('name');
 
-  // This uses the ES2015 spread operator to pass properties as it is more DRY
-  // This is equivalent to:
-  // <SuhBloopWidget $$suhBloopStore={$$suhBloopStore} actions={actions} />
   return (
     <div>
-      <button>Apply Now!</button>
+      <a href={$$suhBloopStore.get('appConfig').get('googleFormUrl')}>Apply Now!</a>
       <button>Log In</button>
     </div>
   );
 };
 
 SuhBloop.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  //
-  // // This corresponds to the value used in function select above.
-  // // We prefix all property and variable names pointing to Immutable.js objects with '$$'.
-  // // This allows us to immediately know we don't call $$suhBloopStore['someProperty'], but
-  // // instead use the Immutable.js `get` API for Immutable.Map
-  // $$suhBloopStore: PropTypes.instanceOf(Immutable.Map).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  $$suhBloopStore: PropTypes.instanceOf(Immutable.Map).isRequired,
 };
 
-// Don't forget to actually use connect!
-// Note that we don't export SuhBloop, but the redux "connected" version of it.
-// See https://github.com/reactjs/react-redux/blob/master/docs/api.md#examples
 export default connect(select)(SuhBloop);

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import { Provider } from 'react-redux';
 
-import createStore from './store/suhBloopStore';
+import createStore from './store/SuhBloopStore';
 import SuhBloop from './containers/SuhBloop';
 
 const SuhBloopApp = (props, _railsContext) => {
