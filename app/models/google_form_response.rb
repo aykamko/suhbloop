@@ -2,11 +2,13 @@
 #
 # Table name: google_form_responses
 #
-#  id          :integer          not null, primary key
-#  response_id :string
-#  timestamp   :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id               :integer          not null, primary key
+#  response_id      :string
+#  timestamp        :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  respondent_email :string
+#  respondent_name  :string
 #
 # Indexes
 #

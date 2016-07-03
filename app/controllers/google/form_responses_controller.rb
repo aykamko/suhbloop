@@ -9,6 +9,6 @@ class Google::FormResponsesController < ApplicationController
   private
 
   def create_params
-    params.permit(:response_id, :timestamp)
+    params.permit(:response_id, :timestamp, :respondent_email, :respondent_name)
   end
 end
