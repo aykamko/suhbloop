@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703211532) do
+ActiveRecord::Schema.define(version: 20160704174538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160703211532) do
     t.datetime "updated_at",       null: false
     t.string   "respondent_email"
     t.string   "respondent_name"
+    t.string   "json_data"
     t.index ["response_id"], name: "index_google_form_responses_on_response_id", using: :btree
   end
 

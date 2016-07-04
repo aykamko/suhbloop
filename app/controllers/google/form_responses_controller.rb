@@ -12,6 +12,11 @@ module Google
       GoogleFormResponse.create(create_params)
     end
 
+    def show
+      @response = GoogleFormResponse.where(response_id: params[:id]).first
+      render json: @response
+    end
+
     private
 
     def create_params

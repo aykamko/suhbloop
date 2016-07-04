@@ -16,11 +16,12 @@ const receiveResponse = createAction('RECEIVE_RESPONSE', (responseId, responseDa
 export function fetchResponse(responseId) {
   return dispatch => {
     dispatch(requestResponse(responseId));
-    return dispatch(receiveResponse(responseId, [{ hello: 'world' }]));
-    // return request(`/google/form_response/${responseId}`)
-    //   .end((err, res) => {
-    //     dispatch(receiveResponses(responseId, JSON.parse(res.text)));
-    //   });
+    return request(`/google/form_responses/${responseId}`)
+      .end((err, res) => {
+        console.log('wat');
+        const responseData = JSON.parse(JSON.parse(res.text).json_data);
+        dispatch(receiveResponse(responseId, responseData));
+      });
   };
 }
 

@@ -16,6 +16,13 @@ class Response extends Component {
     dispatch(fetchResponse(responseId));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.responseId !== this.props.responseId) {
+      const { dispatch, responseId } = nextProps;
+      dispatch(fetchResponse(responseId));
+    }
+  }
+
   render() {
     const { responseData, isFetching } = this.props;
 

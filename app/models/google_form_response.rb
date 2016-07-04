@@ -9,6 +9,7 @@
 #  updated_at       :datetime         not null
 #  respondent_email :string
 #  respondent_name  :string
+#  json_data        :string
 #
 # Indexes
 #
