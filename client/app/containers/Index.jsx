@@ -8,7 +8,7 @@ const Index = (props) => {
     <div>
       <ul>
         <li><a target="_blank" href={appConfig.googleFormUrl}>Apply Now!</a></li>
-        <li><Link to="/log_in">Log In</Link></li>
+        <li><Link to="/responses">See Responses</Link></li>
       </ul>
     </div>
   );

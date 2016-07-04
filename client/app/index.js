@@ -7,6 +7,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createStore from './store/SuhBloopStore';
 import Index from './containers/Index';
 import ResponseList from './containers/ResponseList';
+import Response from './containers/Response';
 
 const SuhBloopApp = (props /* _railsContext */) => {
   const store = createStore(props);
@@ -18,7 +19,9 @@ const SuhBloopApp = (props /* _railsContext */) => {
     <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={Index} />
-        <Route path="/log_in" component={ResponseList} />
+        <Route path="/responses" component={ResponseList}>
+          <Route path="/response/:responseId" component={Response} />
+        </Route>
       </Router>
     </Provider>
   );

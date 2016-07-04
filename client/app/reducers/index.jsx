@@ -1,30 +1,22 @@
-import { REQUEST_RESPONSES, RECEIVE_RESPONSES } from '../actions/api';
+import { handleActions } from 'redux-actions';
 
-function responseListReducer(state = {
+const responseListReducer = handleActions({
+  REQUEST_RESPONSES: state => ({ ...state,
+    isFetching: true,
+  }),
+  RECEIVE_RESPONSES: (state, { payload }) => ({ ...state,
+    isFetching: false,
+    responses: payload.responses,
+    lastUpdated: payload.receivedAt,
+  }),
+}, {
   isFetching: true,
   responses: [],
-}, action) {
-  switch (action.type) {
-    case REQUEST_RESPONSES:
-      return { ...state,
-        isFetching: true,
-      };
-    case RECEIVE_RESPONSES:
-      return { ...state,
-        isFetching: false,
-        responses: action.responses,
-        lastUpdated: action.receivedAt,
-      };
-    default:
-      return state;
-  }
-}
+});
 
-function indexReducer(state = {
+const indexReducer = () => ({
   appConfig: { googleFormUrl: '' },
-} /* action */) {
-  return state;
-}
+});
 
 export default {
   indexReducer,

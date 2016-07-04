@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { fetchResponses } from '../actions/api';
 
@@ -28,7 +29,11 @@ class ResponseList extends Component {
         <span>Last Updated: {lastUpdated}</span>
         <ul>
           {responses.map(response =>
-            <li key={response.response_id}>{response.respondent_name}</li>
+            <li key={response.response_id}>
+              <Link to={`/response/${response.response_id}`}>
+                {response.respondent_name}
+              </Link>
+            </li>
           )}
         </ul>
       </div>
@@ -36,9 +41,4 @@ class ResponseList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { responseListReducer } = state;
-  return responseListReducer;
-}
-
-export default connect(mapStateToProps)(ResponseList);
+export default connect(state => state.responseListReducer)(ResponseList);
