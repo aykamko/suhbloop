@@ -10,6 +10,7 @@ class ResponseList extends Component {
     responses: PropTypes.array.isRequired,
     lastUpdated: PropTypes.number,
     dispatch: PropTypes.func.isRequired,
+    children: PropTypes.element,
   };
 
   componentDidMount() {
@@ -36,6 +37,7 @@ class ResponseList extends Component {
             </li>
           )}
         </ul>
+        {this.props.children}
       </div>
     );
   }
