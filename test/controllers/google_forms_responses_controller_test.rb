@@ -14,7 +14,7 @@ class GoogleFormsResponsesControllerTest < ActionDispatch::IntegrationTest
     }
     assert_response :success
 
-    gfr = GoogleFormResponse.order('created_at DESC').first
+    gfr = GoogleFormResponse.order(created_at: :desc).first
     assert_equal(@response_id, gfr.response_id)
     assert_equal(@timestamp.to_time(:utc), gfr.timestamp)
     assert_equal(@email, gfr.respondent_email)
