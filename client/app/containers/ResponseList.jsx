@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchResponses } from '../actions/api';
@@ -11,10 +11,6 @@ class ResponseList extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchResponses());
@@ -24,25 +20,24 @@ class ResponseList extends Component {
     const { responses, isFetching, lastUpdated } = this.props;
 
     if (isFetching) {
-      return (
-        <div>
-          <h1>fetching</h1>
-        </div>
-      );
-    } else {
-      return (
-        <div>
+      return <h1>fetching</h1>;
+    }
+
+    return (
+      <div>
+        <span>Last Updated: {lastUpdated}</span>
+        <ul>
           {responses.map(response =>
             <li key={response.response_id}>{response.respondent_name}</li>
           )}
-        </div>
-      );
-    }
+        </ul>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
-  const { responseListReducer } = state
+  const { responseListReducer } = state;
   return responseListReducer;
 }
 

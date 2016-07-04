@@ -19,10 +19,10 @@ function receiveResponses(responses) {
 
 export function fetchResponses() {
   return dispatch => {
-    dispatch(requestResponses())
+    dispatch(requestResponses());
     return request('/google/form_responses')
       .end((err, res) => {
         dispatch(receiveResponses(JSON.parse(res.text)));
       });
-  }
+  };
 }
