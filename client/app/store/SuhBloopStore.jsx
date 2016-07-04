@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import Immutable from 'immutable';
 
 import thunkMiddleware from 'redux-thunk';
@@ -13,7 +14,10 @@ export default (props) => {
   };
 
   return createStore(
-    combineReducers(reducers),
+    combineReducers({
+      ...reducers,
+      routing: routerReducer,
+    }),
     initialState,
     applyMiddleware(
       thunkMiddleware,
