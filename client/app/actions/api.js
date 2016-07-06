@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import request from 'superagent';
+import request from '../utils/superagent';
 
 const requestResponses = createAction('REQUEST_RESPONSES');
 const receiveResponses = createAction('RECEIVE_RESPONSES', responses => ({
@@ -16,7 +16,8 @@ const receiveResponse = createAction('RECEIVE_RESPONSE', (responseId, responseDa
 export function fetchResponse(responseId) {
   return dispatch => {
     dispatch(requestResponse(responseId));
-    return request(`/google/form_responses/${responseId}`)
+    return request
+      .get(`/google/form_responses/${responseId}`)
       .end((err, res) => {
         console.log('wat');
         const responseData = JSON.parse(JSON.parse(res.text).json_data);
@@ -28,7 +29,8 @@ export function fetchResponse(responseId) {
 export function fetchResponses() {
   return dispatch => {
     dispatch(requestResponses());
-    return request('/google/form_responses')
+    return request
+      .get('/google/form_responses')
       .end((err, res) => {
         dispatch(receiveResponses(JSON.parse(res.text)));
       });

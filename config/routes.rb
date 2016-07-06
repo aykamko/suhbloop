@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#index'
+  match '*all', to: 'application#preflight', via: [:options]
 
   namespace :google do
     resources :form_responses, only: [:show, :index, :create]

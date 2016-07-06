@@ -4,17 +4,22 @@ const path = require('path');
 const devBuild = process.env.NODE_ENV !== 'production';
 const nodeEnv = devBuild ? 'development' : 'production';
 
-config = {
+const isDevServer = process.env.DEV_SERVER !== undefined;
+
+const config = {
   entry: [
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
+    'webpack-dev-server/client?http://0.0.0.0:1337', // WebpackDevServer host and port
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './app/index',
   ],
 
   output: {
     filename: 'webpack-bundle.js',
-    path: '../app/assets/webpack',
+    path: path.resolve('../app/assets/webpack'),
+    publicPath: '/static/',
   },
 
   resolve: {
@@ -30,6 +35,7 @@ config = {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     loaders: [
@@ -38,7 +44,8 @@ config = {
         loader: 'imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham',
       },
       {
-        test: /\.jsx?$/, loader: 'babel-loader',
+        test: /\.jsx?$/,
+        loaders: ['react-hot', 'babel'],
         exclude: /node_modules/,
       },
     ],

@@ -1,8 +1,5 @@
 module Google
   class FormResponsesController < ApplicationController
-    # TODO(aleks, 07/03/16): validate Google's identity before creating form response
-    protect_from_forgery except: :create
-
     def index
       @responses = GoogleFormResponse.all.order(created_at: :desc)
       render json: @responses

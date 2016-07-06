@@ -11,5 +11,8 @@
     "test": "rspec",
     "eslint": "cd client && npm run lint",
     "eslint_real": "cd client && npm run lint_real"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^1.3.0"
   }
 }
