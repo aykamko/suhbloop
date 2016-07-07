@@ -19,7 +19,6 @@ export function fetchResponse(responseId) {
     return request
       .get(`/google/form_responses/${responseId}`)
       .end((err, res) => {
-        console.log('wat');
         const responseData = JSON.parse(JSON.parse(res.text).json_data);
         dispatch(receiveResponse(responseId, responseData));
       });
