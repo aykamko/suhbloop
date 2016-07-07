@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :reviewers
   match '*all', to: 'application#preflight', via: [:options]
 
   namespace :google do
