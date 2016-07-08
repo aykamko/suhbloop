@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { reducer as formReducer } from 'redux-form';
 
 const responseReducer = handleActions({
   REQUEST_RESPONSE: state => ({ ...state,
@@ -32,6 +33,7 @@ const indexReducer = () => ({
 });
 
 export default {
+  form: formReducer,
   indexReducer,
   responseListReducer,
   responseReducer,

@@ -13,6 +13,7 @@ const config = {
     'babel-polyfill',
     'webpack-dev-server/client?http://0.0.0.0:1337', // WebpackDevServer host and port
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    'react-hot-loader/patch',
     './app/index',
   ],
 
@@ -45,7 +46,7 @@ const config = {
       },
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        loader: 'babel',
         exclude: /node_modules/,
       },
     ],

@@ -8,6 +8,7 @@ import createStore from './store/SuhBloopStore';
 import Index from './containers/Index';
 import ResponseList from './containers/ResponseList';
 import Response from './containers/Response';
+import LoginPage from './containers/pages/LoginPage';
 
 const store = createStore({});
 
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/responses" component={ResponseList}>
         <Route path="/response/:responseId" component={Response} />
       </Route>
+      <Route path="/login" component={LoginPage} />
     </Router>
   </Provider>,
   document.getElementById('root'),
