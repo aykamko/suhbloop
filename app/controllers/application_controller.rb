@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :allow_cross_origin_requests, if: proc { Rails.env.development? }
 
   def preflight
