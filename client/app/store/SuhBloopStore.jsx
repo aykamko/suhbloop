@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { browserHistory } from 'react-router';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 
 import thunkMiddleware from 'redux-thunk';
 
@@ -19,6 +20,7 @@ export default (props) => {
     }),
     initialState,
     applyMiddleware(
+      routerMiddleware(browserHistory),
       thunkMiddleware,
     ),
   );

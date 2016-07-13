@@ -1,35 +1,19 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import LoginForm from '../../components/LoginForm';
-// import auth from '../../utils/auth';
-// import { login } from '../../actions/AppActions';
-// import LoadingIndicator from '../LoadingIndicator.react';
+import React from 'react';
 
-export default class LoginPage extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  }
+const LoginPage = () => {
+  const params = {
+    auth_origin_url: encodeURIComponent(window.location.href),
+  };
+  const query = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
-  render() {
-    const { dispatch, formIsSubmitting } = this.props;
-    return (
-      <div className="form-page__wrapper">
-        <div className="form-page__form-wrapper">
-          <div className="form-page__form-header">
-            <h2 className="form-page__form-heading">Login</h2>
-          </div>
-          <LoginForm />
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h2>Login With Github</h2>
+      <button>
+        <a href={`http://localhost:3000/auth/github?${query}`}>Submit</a>
+      </button>
+    </div>
+  );
+};
 
-  _login = (username, password) => {
-    debugger;
-    // this.props.dispatch(login(username, password));
-  }
-}
-
-// <LoginForm handleSubmit={this._login} submitting={formIsSubmitting} />
-
-export default connect(({ loginPageReducer }) => loginPageReducer)(LoginPage);
+export default LoginPage;

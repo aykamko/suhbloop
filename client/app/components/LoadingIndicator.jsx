@@ -1,3 +1,4 @@
+/* TODO
 import React from 'react';
 
 // Source: https://github.com/tobiasahlin/SpinKit
@@ -22,3 +23,4 @@ const LoadingIndicator = () => (
 )
 
 export default LoadingIndicator;
+*/

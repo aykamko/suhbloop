@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise_token_auth', '~> 0.1.37'
+gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth', branch: 'master'
 gem 'omniauth-github'
 
 group :development, :test do

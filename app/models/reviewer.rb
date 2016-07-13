@@ -5,6 +5,7 @@
 #  id                     :integer          not null, primary key
 #  provider               :string           default("email"), not null
 #  uid                    :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -29,7 +30,7 @@
 #
 
 class Reviewer < ActiveRecord::Base
-  # Include default devise modules.
-  devise :recoverable, :rememberable, :trackable, :omniauthable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable
   include DeviseTokenAuth::Concerns::User
 end

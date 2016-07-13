@@ -1,3 +1,4 @@
+/* TODO
 import React from 'react';
 import LoadingIndicator from './LoadingIndicator';
 
@@ -8,3 +9,4 @@ const LoadingButton = (props) => (
 )
 
 export default LoadingButton;
+*/
