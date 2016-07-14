@@ -15,51 +15,53 @@ const responseReducer = handleActions({
 });
 
 const responseListReducer = handleActions({
-  REQUEST_RESPONSES: state => ({ ...state,
+  RESPONSE_LIST_REQUEST: state => ({ ...state,
     isFetching: true,
+    err: null,
   }),
-  RECEIVE_RESPONSES: (state, { payload }) => ({ ...state,
+  RESPONSE_LIST_SUCCESS: (state, { payload }) => ({ ...state,
     isFetching: false,
-    responses: payload.responses,
+    responseList: payload.responseList,
     lastUpdated: payload.receivedAt,
+    err: null,
+  }),
+  RESPONSE_LIST_FAILURE: (state, err) => ({ ...state,
+    isFetching: false,
+    err,
   }),
 }, {
   isFetching: true,
-  responses: [],
+  responseList: [],
+  err: null,
 });
 
 const authDefault = {
-  loggedIn: false,
-  authToken: null,
-  clientId: null,
-  uid: null,
-  expiry: null,
+  loggedIn: Date.now() < (parseInt(localStorage.getItem('auth.expiry') || '0', 10) * 1000),
+  authToken: localStorage.getItem('auth.authToken'),
+  clientId: localStorage.getItem('auth.clientId'),
+  uid: localStorage.getItem('auth.uid'),
+  expiry: localStorage.getItem('auth.expiry'),
+};
+const updateAuth = (state, { payload }) => {
+  const authInfo = {
+    authToken: payload.auth_token,
+    clientId: payload.client_id,
+    uid: payload.uid,
+    expiry: payload.expiry,
+  };
+  for (const key of Object.keys(authInfo)) {
+    localStorage.setItem(`auth.${key}`, authInfo[key]);
+  }
+
+  return {
+    ...state,
+    loggedIn: true,
+    ...authInfo,
+  };
 };
 const authReducer = handleActions({
-  LOG_IN: (state, { payload }) => {
-    const authInfo = {
-      authToken: payload.auth_token,
-      clientId: payload.client_id,
-      uid: payload.uid,
-      expiry: payload.expiry,
-    };
-    for (const key of Object.keys(authInfo)) {
-      localStorage.setItem(`auth.${key}`, authInfo[key]);
-    }
-
-    return {
-      ...state,
-      loggedIn: true,
-      ...authInfo,
-    };
-  },
-  LOG_IN_FROM_LOCAL_STORAGE: (state) => ({ ...state,
-    loggedIn: true,
-    authToken: localStorage.getItem('auth.authToken'),
-    clientId: localStorage.getItem('auth.clientId'),
-    uid: localStorage.getItem('auth.uid'),
-    expiry: localStorage.getItem('auth.expiry'),
-  }),
+  LOG_IN: updateAuth,
+  UPDATE_AUTH: updateAuth,
   LOG_OUT: (state) => {
     for (const key of Object.keys(authDefault)) {
       localStorage.removeItem(`auth.${key}`);
@@ -67,7 +69,11 @@ const authReducer = handleActions({
 
     return {
       ...state,
-      ...authDefault,
+      loggedIn: false,
+      authToken: null,
+      clientId: null,
+      uid: null,
+      expiry: null,
     };
   },
 }, authDefault);

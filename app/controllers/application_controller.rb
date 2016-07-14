@@ -14,7 +14,9 @@ class ApplicationController < ActionController::API
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
     headers['Access-Control-Allow-Headers'] = \
-      'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization, ' \
+      'access-token, token-type, client, expiry, uid'
+    headers['Access-Control-Expose-Headers'] = headers['Access-Control-Allow-Headers']
     headers['Access-Control-Max-Age'] = '1728000'
   end
 end

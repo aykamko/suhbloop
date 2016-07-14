@@ -1,5 +1,7 @@
 module Google
   class FormResponsesController < ApplicationController
+    before_action :authenticate_reviewer!
+
     def index
       @responses = GoogleFormResponse.all.order(created_at: :desc)
       render json: @responses

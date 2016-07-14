@@ -10,7 +10,7 @@ const LoginPage = () => {
     <div>
       <h2>Login With Github</h2>
       <button>
-        <a href={`http://localhost:3000/auth/github?${query}`}>Submit</a>
+        <a href={`http://localhost:3000/auth/github?${query}`}>Login</a>
       </button>
     </div>
   );

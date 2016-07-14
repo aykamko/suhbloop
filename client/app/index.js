@@ -9,25 +9,16 @@ import Index from './containers/Index';
 import ResponseList from './containers/ResponseList';
 import Response from './containers/Response';
 import LoginPage from './containers/pages/LoginPage';
-import DashboardPage from './containers/pages/DashboardPage';
 
-const store = createStore({});
+export const store = createStore({});
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
 
-function maybeLogInFromLocalStorage() {
-  if (Date.now() < (parseInt(localStorage.getItem('auth.expiry'), 10) * 1000)) {
-    store.dispatch({ type: 'LOG_IN_FROM_LOCAL_STORAGE' });
-    return true;
-  }
-  return false;
-}
-
 function requireAuth(nextState, replace) {
-  if (!store.getState().auth.loggedIn && !maybeLogInFromLocalStorage()) {
+  if (!store.getState().auth.loggedIn) {
     // redirect back to login.
-    replace('/login');
+    replace('/');
   }
 }
 
@@ -41,7 +32,7 @@ function checkAuth(nextState, replace) {
       payload: nextState.location.query,
     });
     replace('/dashboard');
-  } else if (maybeLogInFromLocalStorage()) {
+  } else if (store.getState().auth.loggedIn) {
     replace('/dashboard');
   }
 }
@@ -49,13 +40,12 @@ function checkAuth(nextState, replace) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={Index} />
-      <Route path="/responses" component={ResponseList}>
-        <Route path="/response/:responseId" component={Response} />
-      </Route>
-      <Route path="/login" component={LoginPage} onEnter={checkAuth} />
+      <Route path="/" component={LoginPage} onEnter={checkAuth} />
       <Route onEnter={requireAuth}>
-        <Route path="/dashboard" component={DashboardPage} />
+        <Route path="/dashboard" component={Index} />
+        <Route path="/responses" component={ResponseList}>
+          <Route path="/response/:responseId" component={Response} />
+        </Route>
       </Route>
     </Router>
   </Provider>,
