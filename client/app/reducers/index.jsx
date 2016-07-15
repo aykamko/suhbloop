@@ -42,13 +42,7 @@ const authDefault = {
   uid: localStorage.getItem('auth.uid'),
   expiry: localStorage.getItem('auth.expiry'),
 };
-const updateAuth = (state, { payload }) => {
-  const authInfo = {
-    authToken: payload.auth_token,
-    clientId: payload.client_id,
-    uid: payload.uid,
-    expiry: payload.expiry,
-  };
+const updateAuth = (state, { authInfo }) => {
   for (const key of Object.keys(authInfo)) {
     localStorage.setItem(`auth.${key}`, authInfo[key]);
   }

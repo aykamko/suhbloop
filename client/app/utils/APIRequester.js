@@ -17,9 +17,9 @@ function extractAuthHeaders(response) {
   if (response.headers.has('access-token')) {
     store.dispatch({
       type: 'UPDATE_AUTH',
-      payload: {
-        auth_token: response.headers.get('access-token'),
-        client_id: response.headers.get('client'),
+      authInfo: {
+        authToken: response.headers.get('access-token'),
+        clientId: response.headers.get('client'),
         uid: response.headers.get('uid'),
         expiry: response.headers.get('expiry'),
       },

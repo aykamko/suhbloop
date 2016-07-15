@@ -29,7 +29,12 @@ function checkAuth(nextState, replace) {
   if (difference.length === 0) {
     store.dispatch({
       type: 'LOG_IN',
-      payload: nextState.location.query,
+      authInfo: {
+        authToken: nextState.location.query['auth_token'],
+        clientId: nextState.location.query['client_id'],
+        uid: nextState.location.query['uid'],
+        expiry: nextState.location.query['expiry'],
+      },
     });
     replace('/dashboard');
   } else if (store.getState().auth.loggedIn) {
