@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { browserHistory } from 'react-router';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 
@@ -25,12 +25,15 @@ export default (props) => {
       routing: routerReducer,
     }),
     initialState,
-    applyMiddleware(
-      routerMiddleware(browserHistory),
-      thunkMiddleware,
-      sagaMiddleware,
-      createLogger(),
-    ),
+    compose(
+      applyMiddleware(
+        routerMiddleware(browserHistory),
+        thunkMiddleware,
+        sagaMiddleware,
+        createLogger(),
+      ),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
   );
 
   sagaMiddleware.run(rootSaga);
