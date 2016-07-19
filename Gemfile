@@ -29,6 +29,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth', branch: 'master'
 gem 'omniauth-github'
 
+# Crowd-BT
+gem 'rb-gsl'
+gem 'distribution'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

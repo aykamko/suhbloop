@@ -66,6 +66,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    distribution (0.7.3)
     erubis (2.7.0)
     execjs (2.7.0)
     faker (1.6.3)
@@ -77,6 +78,7 @@ GEM
       thor (~> 0.19.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    gsl (2.1.0.1)
     hashie (3.4.4)
     i18n (0.7.0)
     jbuilder (2.4.1)
@@ -169,6 +171,8 @@ GEM
     rainbow (2.1.0)
     rake (11.2.2)
     rb-fsevent (0.9.7)
+    rb-gsl (1.16.0.6)
+      gsl
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     react_on_rails (6.0.4)
@@ -238,6 +242,7 @@ DEPENDENCIES
   annotate
   byebug
   devise_token_auth!
+  distribution
   faker
   jbuilder (~> 2.0)
   jquery-rails
@@ -248,6 +253,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 3.0)
   rails (>= 5.0.0.rc1, < 5.1)
+  rb-gsl
   react_on_rails (~> 6)
   rubocop
   sass-rails (~> 5.0)

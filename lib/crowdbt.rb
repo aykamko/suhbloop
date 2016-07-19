@@ -1,9 +1,12 @@
 # rubocop:disable all
-#
+require 'gsl'
+require 'distribution'
+
 # Implementation of Crowd-BT
 # Source: http://people.stern.nyu.edu/xchen3/images/crowd_pairwise.pdf
 module CrowdBT
   K = 0.0001
+  GAMMA = 5.0
 
   # See 4.1 Online Learning for implementation details
   def update(mu_i, mu_j, sigmasq_i, sigmasq_j, alpha, beta)
@@ -41,6 +44,34 @@ module CrowdBT
     new_alpha = t * m1_eta
     new_beta = t * (1 - m1_eta)
 
-    [new_mu_i, new_mu_j, new_sigmasq_i, new_sigmasq_j, new_alpha, new_beta]
+    [new_mu_i, new_mu_j, new_sigmasq_i, new_sigmasq_j, new_alpha, new_beta, c]
+  end
+
+  # Source: https://www.wikiwand.com/en/Beta_distribution
+  def divergence_beta(alpha, beta, alpha_1, beta_1)
+    (Math.logbeta(alpha_1, beta_1) - Math.logbeta(alpha, beta)) \
+      + (alpha - alpha_1) * GSL::Sf::psi(alpha) \
+      + (beta - beta_1) * GSL::Sf::psi(beta) \
+      + (alpha_1 - alpha + beta_1 - beta) * GSL::Sf::psi(alpha + beta)
+  end
+
+  # Source: https://www.wikiwand.com/en/Normal_distribution
+  def divergence_normal(mu_1, sigmasq_1, mu_2, sigmasq_2)
+    (mu_1 - mu_2)**2 / (2 * sigmasq_2) \
+      + 0.5 * (sigmasq_1 / sigmasq_2 - 1 - Math.log(sigmasq_1 / sigmasq_2))
+  end
+
+  def information_gain(mu_i, sigmasq_i, mu_j, sigmasq_j, alpha, beta)
+    iwins_mu_i, iwins_mu_j, iwins_sigmasq_i, iwins_sigmasq_j, iwins_alpha, iwins_beta, iwins_c = \
+      update(mu_i, mu_j, sigmasq_i, sigmasq_j, alpha, beta)
+    jwins_mu_i, jwins_mu_j, jwins_sigmasq_i, jwins_sigmasq_j, jwins_alpha, jwins_beta, jwins_c = \
+      update(mu_j, mu_i, sigmasq_j, sigmasq_i, alpha, beta)
+
+    iwins_c * (divergence_normal(iwins_mu_i, iwins_sigmasq_i, mu_i, sigmasq_i) \
+               + divergence_normal(iwins_mu_j, iwins_sigmasq_j, mu_j, sigmasq_j) \
+               + GAMMA * divergence_beta(iwins_alpha, iwins_beta, alpha, beta)) \
+    + jwins_c * (divergence_normal(jwins_mu_i, jwins_sigmasq_i, mu_i, sigmasq_i) \
+               + divergence_normal(jwins_mu_j, jwins_sigmasq_j, mu_j, sigmasq_j) \
+               + GAMMA * divergence_beta(jwins_alpha, jwins_beta, alpha, beta))
   end
 end
