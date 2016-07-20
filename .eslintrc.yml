@@ -1,0 +1,9 @@
+parser: babel-eslint
+
+extends: airbnb
+
+rules:
+  no-underscore-dangle: 0
+
+settings:
+  import/resolver: webpack # resolves webpack-configured import paths automagically

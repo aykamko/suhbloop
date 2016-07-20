@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
-import { Link } from 'react-router';
 
-export const responseRequest = createAction('RESPONSE_REQUEST', id => ({id}));
+export const responseRequest = createAction('RESPONSE_REQUEST', id => ({ id }));
 export const responseSuccess = createAction('RESPONSE_SUCCESS', (id, response) => ({
   id,
   response,
@@ -24,12 +23,6 @@ class Response extends Component {
     isFetching: false,
   };
 
-  _maybeRequestResponse = (props) => {
-    const { dispatch, response, responseId } = props;
-    if (response) return;
-    dispatch(responseRequest(responseId));
-  }
-
   componentDidMount() {
     this._maybeRequestResponse(this.props);
   }
@@ -37,6 +30,12 @@ class Response extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.responseId === this.props.responseId) return;
     this._maybeRequestResponse(nextProps);
+  }
+
+  _maybeRequestResponse = (props) => {
+    const { dispatch, response, responseId } = props;
+    if (response) return;
+    dispatch(responseRequest(responseId));
   }
 
   render() {

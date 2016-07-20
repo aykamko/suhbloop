@@ -1,7 +1,7 @@
 // Modified from:
 // https://github.com/mxstbr/react-boilerplate/blob/aacef636b49b739a0a98fdcae8df057b389da52a/app/utils/request.js
 import 'whatwg-fetch';
-import { store } from '../index'; // TODO(aleks, 07/14/16): ew
+import { store } from 'app/index'; // TODO(aleks, 07/14/16): ew
 
 const apiServerPrefix = 'http://localhost:3000';
 
@@ -59,21 +59,19 @@ export default {
       },
     });
   },
-  post: (route, body) => {
-    return request(route, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'access-token': localStorage.getItem('auth.authToken'),
-        'token-type': 'Bearer',
-        client: localStorage.getItem('auth.clientId'),
-        expiry: localStorage.getItem('auth.expiry'),
-        uid: localStorage.getItem('auth.uid'),
-      },
-      body: JSON.stringify(body),
-    });
-  },
+  post: (route, body) => request(route, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'access-token': localStorage.getItem('auth.authToken'),
+      'token-type': 'Bearer',
+      client: localStorage.getItem('auth.clientId'),
+      expiry: localStorage.getItem('auth.expiry'),
+      uid: localStorage.getItem('auth.uid'),
+    },
+    body: JSON.stringify(body),
+  }),
 
   Constants: {
     google: {
@@ -81,6 +79,6 @@ export default {
         index: '/google/form_responses',
         show: (id) => `/google/form_responses/${id}`,
       },
-    }
-  }
+    },
+  },
 };

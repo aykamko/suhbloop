@@ -24,7 +24,6 @@ const config = {
   },
 
   resolve: {
-    modulesDirectories: ['node_modules', 'app'],
     alias: {
       app: path.resolve('./app'),
     },
@@ -58,7 +57,6 @@ const config = {
 module.exports = config;
 
 if (devBuild) {
-  console.log('Webpack dev build for Rails'); // eslint-disable-line no-console
   module.exports.devtool = 'eval-source-map';
 } else {
   config.plugins.push(

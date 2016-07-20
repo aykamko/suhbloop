@@ -30,10 +30,10 @@ function checkAuth(nextState, replace) {
     store.dispatch({
       type: 'LOG_IN',
       authInfo: {
-        authToken: nextState.location.query['auth_token'],
-        clientId: nextState.location.query['client_id'],
-        uid: nextState.location.query['uid'],
-        expiry: nextState.location.query['expiry'],
+        authToken: nextState.location.query.auth_token,
+        clientId: nextState.location.query.client_id,
+        uid: nextState.location.query.uid,
+        expiry: nextState.location.query.expiry,
       },
     });
     replace('/dashboard');

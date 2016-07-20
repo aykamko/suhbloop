@@ -15,12 +15,14 @@ const handleResponseAction = (state, { type, payload }) => {
         return { ...responseData,
           [payload.id]: { ...responseData[payload.id],
             isFetching: false,
-            response: payload.response
+            response: payload.response,
           },
         };
       // TODO
       // case 'RESPONSE_FAILURE':
-    };
+      default:
+        return responseData;
+    }
   })();
 
   return {
