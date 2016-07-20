@@ -3,6 +3,8 @@
 import 'whatwg-fetch';
 import { store } from '../index'; // TODO(aleks, 07/14/16): ew
 
+const apiServerPrefix = 'http://localhost:3000';
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -32,23 +34,19 @@ function parseJSON(response) {
   return response.json();
 }
 
-function request(url, options) {
-  return fetch(url, options)
+function request(route, options) {
+  return fetch(`${apiServerPrefix}${route}`, options)
     .then(checkStatus)
     .then(extractAuthHeaders)
-    .then(parseJSON)
-    .then(data => data)
-    .catch(err => ({ err }));
+    .then(parseJSON);
 }
 
-const apiServerPrefix = 'http://localhost:3000';
-
-export default class APIRequester {
-  static get(route, params) {
+export default {
+  get: (route, params) => {
     const query = Object.keys(params || {})
                         .map(key => `${key}=${params[key]}`)
                         .join('&');
-    return request(`${apiServerPrefix}${route}?${query}`, {
+    return request(`${route}?${query}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -60,10 +58,9 @@ export default class APIRequester {
         uid: localStorage.getItem('auth.uid'),
       },
     });
-  }
-
-  static post(route, body) {
-    return request(`${apiServerPrefix}${route}`, {
+  },
+  post: (route, body) => {
+    return request(route, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -76,5 +73,14 @@ export default class APIRequester {
       },
       body: JSON.stringify(body),
     });
+  },
+
+  Constants: {
+    google: {
+      formResponses: {
+        index: '/google/form_responses',
+        show: (id) => `/google/form_responses/${id}`,
+      },
+    }
   }
-}
+};
