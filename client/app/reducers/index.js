@@ -1,18 +1,33 @@
 import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 
-const responseReducer = handleActions({
-  REQUEST_RESPONSE: state => ({ ...state,
-    isFetching: true,
-  }),
-  RECEIVE_RESPONSE: (state, { payload }) => ({ ...state,
-    ...payload,
-    isFetching: false,
-  }),
-}, {
-  isFetching: true,
-  responseData: [],
-});
+const handleResponseAction = (state, { type, payload }) => {
+  const { responseData } = state;
+  const newResponseData = (() => {
+    switch (type) {
+      case 'RESPONSE_REQUEST':
+        return { ...responseData,
+          [payload.id]: { ...responseData[payload.id],
+            isFetching: true,
+          },
+        };
+      case 'RESPONSE_SUCCESS':
+        return { ...responseData,
+          [payload.id]: { ...responseData[payload.id],
+            isFetching: false,
+            response: payload.response
+          },
+        };
+      // TODO
+      // case 'RESPONSE_FAILURE':
+    };
+  })();
+
+  return {
+    ...state,
+    responseData: newResponseData,
+  };
+};
 
 const responseListReducer = handleActions({
   RESPONSE_LIST_REQUEST: state => ({ ...state,
@@ -29,9 +44,13 @@ const responseListReducer = handleActions({
     isFetching: false,
     err,
   }),
+  RESPONSE_REQUEST: handleResponseAction,
+  RESPONSE_SUCCESS: handleResponseAction,
+  RESPONSE_FAILURE: handleResponseAction,
 }, {
   isFetching: true,
   responseList: [],
+  responseData: {},
   err: null,
 });
 
@@ -81,5 +100,4 @@ export default {
   form: formReducer,
   indexReducer,
   responseListReducer,
-  responseReducer,
 };

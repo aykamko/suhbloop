@@ -49,7 +49,7 @@ ReactDOM.render(
       <Route onEnter={requireAuth}>
         <Route path="/dashboard" component={Index} />
         <Route path="/responses" component={ResponseList}>
-          <Route path="/response/:responseId" component={Response} />
+          <Route path="/responses/:responseId" component={Response} />
         </Route>
       </Route>
     </Router>

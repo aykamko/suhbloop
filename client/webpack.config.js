@@ -24,6 +24,7 @@ const config = {
   },
 
   resolve: {
+    modulesDirectories: ['node_modules', 'app'],
     extensions: ['', '.js', '.jsx'],
   },
 

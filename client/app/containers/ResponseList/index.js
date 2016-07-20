@@ -37,7 +37,7 @@ class ResponseList extends Component {
         <ul>
           {responseList.map(response =>
             <li key={response.response_id}>
-              <Link to={`/response/${response.response_id}`}>
+              <Link to={`/responses/${response.response_id}`}>
                 {response.respondent_name}
               </Link>
             </li>
