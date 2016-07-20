@@ -25,6 +25,9 @@ const config = {
 
   resolve: {
     modulesDirectories: ['node_modules', 'app'],
+    alias: {
+      app: path.resolve('./app'),
+    },
     extensions: ['', '.js', '.jsx'],
   },
 
