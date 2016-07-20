@@ -1,7 +1,7 @@
 // Modified from:
 // https://github.com/mxstbr/react-boilerplate/blob/aacef636b49b739a0a98fdcae8df057b389da52a/app/utils/request.js
 import 'whatwg-fetch';
-import { store } from 'app/index'; // TODO(aleks, 07/14/16): ew
+import { store } from '~/index'; // TODO(aleks, 07/14/16): ew
 
 const apiServerPrefix = 'http://localhost:3000';
 

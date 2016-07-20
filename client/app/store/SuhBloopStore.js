@@ -6,9 +6,9 @@ import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from 'app/sagas';
+import rootSaga from '~/sagas';
 
-import reducers from 'app/reducers';
+import reducers from '~/reducers';
 
 export default (props) => {
   const initialState = {

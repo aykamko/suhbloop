@@ -25,7 +25,7 @@ const config = {
 
   resolve: {
     alias: {
-      app: path.resolve('./app'),
+      '~': path.resolve('./app'),
     },
     extensions: ['', '.js', '.jsx'],
   },

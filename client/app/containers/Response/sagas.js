@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
 
-import API from 'app/utils/API';
+import API from '~/utils/API';
 
 import { responseSuccess, responseFailure } from './index';
 
